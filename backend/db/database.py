@@ -21,6 +21,7 @@ def get_db():
     try:
         # suspend function and retrieve values one at a time
         yield db
+        # close databse
     finally:
         db.close()
 
