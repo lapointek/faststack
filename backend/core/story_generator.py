@@ -15,7 +15,7 @@ from langchain_core.output_parsers import PydanticOutputParser
 from core.prompts import STORY_PROMPT
 
 # SQLAlchemy model representing the story table in the database
-from models.story import Story
+from models.story import Story, StoryNode
 from core.models import StoryLLMResponse, StoryNodeLLM
 
 
@@ -73,7 +73,71 @@ class StoryGenerator:
         if isinstance(root_node_data, dict):
             root_node_data = StoryNodeLLM.model_validate(root_node_data)
 
-        # todo: process data
+        cls._process_story_node(db, story_db.id, root_node_data, is_root=True)
 
         db.commit()
         return story_db
+
+    @classmethod
+    def _process_story_node(
+        cls, db: Session, story_id: int, node_data: StoryNodeLLM, is_root: bool = False
+    ) -> StoryNode:
+        # create database StoryNode
+        node = StoryNode(
+            # link node to its Story
+            story_id=story_id,
+            # extract node content safely
+            content=(
+                node_data.content
+                if hasattr(node_data, "content")
+                else node_data["content"]
+            ),
+            # whether this is the root node
+            is_root=is_root,
+            # determine if ending node
+            is_ending=(
+                node_data.isEnding
+                if hasattr(node_data, "isEnding")
+                else node_data["isEnding"]
+            ),
+            # determine if winning ending
+            is_winning_ending=(
+                node_data.isWinningEnding
+                if hasattr(node_data, "isWinningEnding")
+                else node_data["isWinningEnding"]
+            ),
+            # initialize options
+            options=[],
+        )
+        # add node to database
+        db.add(node)
+        # ensures node.id exists before you attach child nodes or options
+        db.flush()
+
+        # check if the node can have children
+        if not node.is_ending and (hasattr(node_data, "options") and node_data.options):
+            # store options
+            options_list = []
+            # loop through each story option
+            for option_data in node_data.options:
+                next_node = option_data.nextNode
+                # extract and validate the next node
+                if isinstance(next_node, dict):
+                    next_node = StoryNodeLLM.model_validate(next_node)
+                # recursively create the child node
+                # false indicates this is not the root node
+                child_node = cls._process_story_node(db, story_id, next_node, False)
+
+                # option text shown to the player
+                options_list.append(
+                    {
+                        "text": option_data.text,
+                        "node_id": child_node.id,
+                    }
+                )
+                # attach options to the current node
+                node.options = options_list
+
+        db.flush()
+        # return fully-processed node
+        return node
