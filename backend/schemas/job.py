@@ -10,7 +10,7 @@ class StoryJobBase(BaseModel):
 
 class StoryJobResponse(BaseModel):
     # unique identifier for the background job
-    job_id: int
+    job_id: str
     # job lifecycle state
     status: str
     # job was created
