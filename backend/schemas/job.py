@@ -18,7 +18,7 @@ class StoryJobResponse(BaseModel):
     # set when job completes successfully
     story_id: Optional[int] = None
     # timestamp when job finished success or failure
-    completed_at = Optional[datetime] = None
+    completed_at: Optional[datetime] = None
     # error message if the job fails
     error: Optional[str] = None
 

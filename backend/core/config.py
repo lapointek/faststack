@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     DEBUG: bool = False
     DATABASE_URL: str
     ALLOWED_ORIGINS: str = ""
-    OPENAPI_API_KEY: str
+    # OPENAPI_API_KEY: str
 
     # Convert ALLOWED_ORIGINS into a list
     @field_validator("ALLOWED_ORIGINS")
