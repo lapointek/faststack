@@ -37,7 +37,6 @@ class StoryNode(Base):
     is_root = Column(Boolean, default=False)
     # where to end story
     is_ending = Column(Boolean, default=False)
-    # winning ending
     is_winning_ending = Column(Boolean, default=False)
     options = Column(JSON, default=list)
     # define relationship to story, makes it bi-directional you can access story.nodes and node.story

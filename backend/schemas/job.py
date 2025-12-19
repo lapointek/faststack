@@ -24,3 +24,7 @@ class StoryJobResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class StoryJobCreate(StoryJobBase):
+    pass
