@@ -28,7 +28,7 @@ class StoryNodeLLM(BaseModel):
 
 
 # represents the entire story returned from LLM
-class storyLLMResponse(BaseModel):
+class StoryLLMResponse(BaseModel):
     title: str = Field(description="The title of the story")
     # starting point of the story (StoryNodeLLM) from which the player
     # can start navigating through the options

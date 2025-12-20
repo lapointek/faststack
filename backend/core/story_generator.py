@@ -1,12 +1,11 @@
 # interacting with the database
 from sqlalchemy.orm import Session
-from core.config import settings
 
 # class to interact with OpenAI chat models
-from langchain_openapi import ChatOpenAI
+from langchain_openai import ChatOpenAI
 
 # define templates for the prompts
-from langchain_core import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 
 # parse the models output into Pydantic models
 from langchain_core.output_parsers import PydanticOutputParser
@@ -17,6 +16,9 @@ from core.prompts import STORY_PROMPT
 # SQLAlchemy model representing the story table in the database
 from models.story import Story, StoryNode
 from core.models import StoryLLMResponse, StoryNodeLLM
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 # defines a class to handle story generation logic
@@ -24,7 +26,7 @@ class StoryGenerator:
     @classmethod
     # private method
     def _get_llm(cls):
-        return ChatOpenAI(model="gpt-4-turbo")
+        return ChatOpenAI(model="gpt-3")
 
     # returns an instance of ChatOpenAI
     @classmethod

@@ -25,6 +25,7 @@ from schemas.story import (
     CreateStoryRequest,
 )
 from schemas.job import StoryJobResponse
+from core.story_generator import StoryGenerator
 
 # endpoint backend URL/api/stories/endpoint
 router = APIRouter(prefix="/stories", tags=["stories"])
@@ -96,10 +97,12 @@ def generate_story_task(job_id: str, theme: str, session_id: str):
             # commit change
             db.commit()
 
-            story = {}  # todo: generate story
+            story = StoryGenerator.generate_story(
+                db, session_id, theme
+            )  # todo: generate story
 
             # hardcoded placeholder, mark job as completed
-            job.story_id = 1  # todo: update story id
+            job.story_id = story.id  # todo: update story id
             job.status = "completed"
             job.completed_at = datetime.now()
             db.commit()
