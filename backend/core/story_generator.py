@@ -26,7 +26,7 @@ class StoryGenerator:
     @classmethod
     # private method
     def _get_llm(cls):
-        return ChatOpenAI(model="gpt-3")
+        return ChatOpenAI(model="gpt-3.5-turbo")
 
     # returns an instance of ChatOpenAI
     @classmethod
