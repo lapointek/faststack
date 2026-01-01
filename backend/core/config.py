@@ -1,5 +1,4 @@
 from typing import List
-
 # Advance python type handling
 from pydantic_settings import BaseSettings
 from pydantic import field_validator
@@ -12,7 +11,7 @@ class Settings(BaseSettings):
     DEBUG: bool = False
     DATABASE_URL: str
     ALLOWED_ORIGINS: str = ""
-    # OPENAI_API_KEY: str
+    OPENAI_API_KEY: str
 
     # Convert ALLOWED_ORIGINS into a list
     @field_validator("ALLOWED_ORIGINS")
