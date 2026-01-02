@@ -134,4 +134,38 @@ def get_complete_story(story_id: int, db: Session = Depends(get_db)):
 
 
 def build_complete_story_tree(db: Session, story: Story) -> CompleteStoryResponse:
-    pass
+    # get all nodes for a story from the database
+    # query the database table/model
+    # select only nodes belonging to the current story
+    # return all matching nodes
+    nodes = db.query(StoryNode).filter(StoryNode.story_id == story.id).all()
+
+    # for every node in nodes create a response object
+    # store it in node_dict using the nodes id as the key
+    node_dict = {}
+    for node in nodes:
+        node_response = CompleteStoryNodeResponse(
+            id=node.id,
+            content=node.content,
+            is_ending=node.is_ending,
+            is_winning_ending=node.is_winning_ending,
+            options=node.options
+        )
+        node_dict[node.id] = node_response
+
+    # search for node that is the root node
+    root_node = next((node for node in nodes if node.is_root), None)
+    # if no root node is found
+    if not root_node:
+        raise HTTPException(status_code=500, detail="Story root node not found")
+
+    # return the complete story response
+    return CompleteStoryResponse(
+        id=story.id,
+        title=story.title,
+        session_id=story.session_id,
+        created_id=story.session_at,
+        root_node=node_dict[root_node.id],
+        all_nodes=node_dict
+    )
+
