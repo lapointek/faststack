@@ -7,7 +7,6 @@ from db.database import Base
 
 class StoryJob(Base):
     __tablename__ = "story_jobs"
-
     id = Column(Integer, primary_key=True, index=True)
     # id that uses a long string value
     job_id = Column(String, index=True, unique=True)
