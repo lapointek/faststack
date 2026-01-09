@@ -19,7 +19,14 @@ function StoryGame({ story, onNewStory }) {
       const node = story.all_nodes[currentNodeId];
 
       setCurrentNode(node);
-      setIsEnding;
+      setIsEnding(node.is_ending);
+      setIsWinningEnding(node.is_winning_ending);
+
+      if (!node.is_ending && node.options && node.options.length > 0) {
+        setOptions(node.options);
+      } else {
+        setOptions([]);
+      }
     }
   }, [currentNodeId, story]);
 
