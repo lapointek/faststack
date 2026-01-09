@@ -102,7 +102,7 @@ def generate_story_task(job_id: str, theme: str, session_id: str):
             )  # todo: generate story
 
             # hardcoded placeholder, mark job as completed
-            job.story_id = story.id  # todo: update story id
+            job.story_id = story.id
             job.status = "completed"
             job.completed_at = datetime.now()
             db.commit()
@@ -149,7 +149,7 @@ def build_complete_story_tree(db: Session, story: Story) -> CompleteStoryRespons
             content=node.content,
             is_ending=node.is_ending,
             is_winning_ending=node.is_winning_ending,
-            options=node.options
+            options=node.options,
         )
         node_dict[node.id] = node_response
 
@@ -166,6 +166,5 @@ def build_complete_story_tree(db: Session, story: Story) -> CompleteStoryRespons
         session_id=story.session_id,
         created_id=story.session_at,
         root_node=node_dict[root_node.id],
-        all_nodes=node_dict
+        all_nodes=node_dict,
     )
-

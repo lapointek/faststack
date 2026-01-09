@@ -1,4 +1,5 @@
 from typing import List
+
 # Advance python type handling
 from pydantic_settings import BaseSettings
 from pydantic import field_validator
@@ -13,7 +14,7 @@ class Settings(BaseSettings):
     ALLOWED_ORIGINS: str = ""
     OPENAI_API_KEY: str
 
-    # Convert ALLOWED_ORIGINS into a list
+    # Convert ALLOWED_ORIGINS from .env into a list
     @field_validator("ALLOWED_ORIGINS")
     def parse_allowed_origins(cls, v: str) -> List[str]:
         # Return value separated by commas if exist otherwise return empty list

@@ -1,5 +1,6 @@
 # interacting with the database
 from sqlalchemy.orm import Session
+from core.config import settings
 
 # class to interact with OpenAI chat models
 from langchain_openai import ChatOpenAI
@@ -26,7 +27,7 @@ class StoryGenerator:
     @classmethod
     # private method
     def _get_llm(cls):
-        return ChatOpenAI(model="gpt-3.5-turbo")
+        return ChatOpenAI(model="gpt-4-turbo")
 
     # returns an instance of ChatOpenAI
     @classmethod
@@ -57,6 +58,7 @@ class StoryGenerator:
 
         # handles different response formats from the LLM
         response_text = raw_response
+        # has attribute
         if hasattr(raw_response, "content"):
             response_text = raw_response.content
 

@@ -10,7 +10,9 @@ class StoryOptionLLM(BaseModel):
     # text displayed for this option
     text: str = Field(description="the text of the option shown to the user")
     # dictionary representing the next story node
-    nexNode: Dict[str, Any] = Field(description="the next node content and its options")
+    nextNode: Dict[str, Any] = Field(
+        description="the next node content and its options"
+    )
 
 
 # node in the story
