@@ -1,6 +1,5 @@
 # interacting with the database
 from sqlalchemy.orm import Session
-from core.config import settings
 
 # class to interact with OpenAI chat models
 from langchain_openai import ChatOpenAI

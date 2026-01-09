@@ -164,7 +164,7 @@ def build_complete_story_tree(db: Session, story: Story) -> CompleteStoryRespons
         id=story.id,
         title=story.title,
         session_id=story.session_id,
-        created_id=story.session_at,
+        created_at=story.created_at,
         root_node=node_dict[root_node.id],
         all_nodes=node_dict,
     )
