@@ -31,4 +31,4 @@ docker-compose up --build
 
 ## About
 
-Project based on a tutorial implementation [link to tutorial](https://www.youtube.com/watch?v=_1P0Uqk50Ps) and has been adapted to run in docker containers
+This project is based on a tutorial implementation [link](https://www.youtube.com/watch?v=_1P0Uqk50Ps) and has been adapted to run in docker containers.
