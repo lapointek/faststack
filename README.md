@@ -28,3 +28,7 @@ podman-compose up --build
 cd faststack
 docker-compose up --build
 ```
+
+## About
+
+Project based on a tutorial implementation [link to tutorial](https://www.youtube.com/watch?v=_1P0Uqk50Ps) and has been adapted to run in docker containers
