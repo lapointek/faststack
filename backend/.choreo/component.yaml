@@ -12,4 +12,4 @@ endpoints:
 dependencies:
   connectionReferences:
     - name: openai-connection
-      resourceRef: service:/faststack/openai/v1/proxy/PROJECT1
+      resourceRef: thirdparty:openai/v1
