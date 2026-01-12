@@ -9,6 +9,3 @@ endpoints:
     networkVisibilities:
       - Project
       - Public
-dependencies:
-  connectionReferences:
-    - name: openai-conn
