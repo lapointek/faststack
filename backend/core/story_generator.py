@@ -28,7 +28,6 @@ class StoryGenerator:
     def _get_llm(cls):
         return ChatOpenAI(
             model="gpt-4o-mini",
-            api_key=os.environ["OPENAI_API_KEY"],
         )
 
     # returns an instance of ChatOpenAI
