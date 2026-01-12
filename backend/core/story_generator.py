@@ -36,7 +36,7 @@ class StoryGenerator:
                 model="gpt-4o-mini", api_key=openai_api_key, base_url=serviceurl
             )
 
-        return ChatOpenAI(model="gpt-4-turbo")
+        return ChatOpenAI(model="gpt-4o-mini")
 
     # returns an instance of ChatOpenAI
     @classmethod
