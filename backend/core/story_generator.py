@@ -25,9 +25,11 @@ load_dotenv()
 # defines a class to handle story generation logic
 class StoryGenerator:
     @classmethod
-    # private method
     def _get_llm(cls):
-        return ChatOpenAI(model="gpt-4o-mini")
+        return ChatOpenAI(
+            model="gpt-4o-mini",
+            api_key=os.environ["OPENAI_API_KEY"],
+        )
 
     # returns an instance of ChatOpenAI
     @classmethod
