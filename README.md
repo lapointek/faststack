@@ -2,8 +2,6 @@
 
 FastStack is an AI-powered, choose-your-own-adventure storytelling application built with the OpenAI API, featuring a Python backend and a JavaScript frontend. The entire application is containerized using Podman and Docker.
 
-## Try the application
-
 ## Installation
 
 ### From source

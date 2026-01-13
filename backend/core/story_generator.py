@@ -141,7 +141,7 @@ class StoryGenerator:
                     }
                 )
                 # attach options to the current node
-                node.options = options_list
+            node.options = options_list
 
         db.flush()
         # return fully-processed node

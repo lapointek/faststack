@@ -83,6 +83,7 @@ function StoryGame({ story, onNewStory }) {
             Restart Story
           </button>
         </div>
+
         {onNewStory && (
           <button onClick={onNewStory} className="new-story-btn">
             New Story
