@@ -10,7 +10,14 @@ Clone the repository:
 
 ```
 git clone https://github.com/lapointek/faststack
-cd faststack
+```
+
+## OpenAI API Key
+
+Add OpenAI API Key to the .env file in backend:
+
+```
+OPENAI_API_KEY=your_api_key_here
 ```
 
 ## Usage
